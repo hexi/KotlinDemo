@@ -62,6 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
+        android:minWidth="100dp"
         android:text="ReactiveX"
         app:layout_constraintBaseline_toBaselineOf="@+id/hint_owner"
         app:layout_constraintLeft_toRightOf="@+id/hint_owner" />
@@ -79,6 +80,7 @@
         android:id="@+id/et_repo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:minWidth="100dp"
         android:text="RxJava"
         app:layout_constraintBaseline_toBaselineOf="@+id/hint_repo"
         app:layout_constraintLeft_toLeftOf="@+id/et_owner" />
