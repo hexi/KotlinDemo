@@ -80,7 +80,7 @@ class SimpleRetrofitActivity : FragmentActivity() {
 
     private suspend fun fetchContributors(owner: String, repo: String): List<Contributor> {
         return withContext(Dispatchers.IO) {
-            ApiFactory.getDataApi()
+            ApiFactory.githubApi
                     .contributors(owner, repo)
                     .await()
         }

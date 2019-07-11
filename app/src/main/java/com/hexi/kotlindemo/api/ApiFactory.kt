@@ -10,12 +10,11 @@ import java.util.concurrent.TimeUnit
 object ApiFactory {
     private var connectTimeout = 30
     private var readTimeout = 20
-
-    fun getDataApi(): GithubApi {
-        return build().create(GithubApi::class.java)
+    val githubApi: GithubApi by lazy {
+        build().create(GithubApi::class.java)
     }
 
-    fun build(): Retrofit {
+    private fun build(): Retrofit {
         return Retrofit.Builder()
                 .baseUrl("https://api.github.com")
                 .addConverterFactory(GsonConverterFactory.create())
