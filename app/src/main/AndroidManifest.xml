@@ -36,6 +36,7 @@
         <activity
             android:name=".activity.SimpleRetrofitActivity"
             android:exported="false"
+            android:windowSoftInputMode="stateHidden|adjustPan"
             android:screenOrientation="portrait" />
     </application>
 

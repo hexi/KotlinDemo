@@ -30,11 +30,12 @@ class SimpleRetrofitActivity : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_simple_retrofit)
-
         initView()
+        hideSoftKeyboard()
     }
 
     private fun initView() {
+        container.setOnClickListener { hideSoftKeyboard() }
         tv_back.setOnClickListener { finish() }
         adapter = MyAdapter()
         recycler_view.layoutManager = LinearLayoutManager(this)
@@ -70,8 +71,10 @@ class SimpleRetrofitActivity : FragmentActivity() {
                         .show()
                 return@launch
             }
+            progress_bar.visibility = View.VISIBLE
             val data = fetchContributors(owner, repo)
             adapter?.setData(data)
+            progress_bar.visibility = View.GONE
         }
     }
 
@@ -88,6 +91,7 @@ class MyAdapter : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
     private val mData: MutableList<Contributor> = mutableListOf()
 
     fun setData(data: List<Contributor>) {
+        this.mData.clear()
         this.mData.addAll(data)
         notifyDataSetChanged()
     }
