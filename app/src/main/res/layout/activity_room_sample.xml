@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/et_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:hint="userName"
+        android:minWidth="100dp"
+        android:textSize="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/btn_insert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="12dp"
+        android:background="@drawable/bg_button"
+        android:gravity="center"
+        android:onClick="insertUser"
+        android:paddingLeft="12dp"
+        android:paddingTop="6dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="6dp"
+        android:text="插入"
+        android:textSize="20dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/et_username"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <View
+        android:id="@+id/horizontal_line0"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="9dp"
+        android:background="#94DFE9"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_username" />
+
+    <TextView
+        android:id="@+id/btn_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="9dp"
+        android:background="@drawable/bg_button"
+        android:onClick="deleteAllUser"
+        android:paddingLeft="12dp"
+        android:paddingTop="6dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="6dp"
+        android:text="删除全部"
+        android:textSize="20dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btn_query"
+        app:layout_constraintRight_toLeftOf="@+id/btn_query" />
+
+    <TextView
+        android:id="@+id/btn_query"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="9dp"
+        android:layout_marginRight="12dp"
+        android:background="@drawable/bg_button"
+        android:gravity="center"
+        android:onClick="queryUsers"
+        android:paddingLeft="12dp"
+        android:paddingTop="6dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="6dp"
+        android:text="查询"
+        android:textSize="20dp"
+        app:layout_constraintLeft_toLeftOf="@+id/btn_insert"
+        app:layout_constraintTop_toBottomOf="@+id/horizontal_line0" />
+
+    <View
+        android:id="@+id/horizontal_line1"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="9dp"
+        android:background="#94DFE9"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_query" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontal_line1" />
+</androidx.constraintlayout.widget.ConstraintLayout>

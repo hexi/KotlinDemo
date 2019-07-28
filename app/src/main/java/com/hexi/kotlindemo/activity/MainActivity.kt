@@ -16,6 +16,10 @@ class MainActivity : FragmentActivity() {
     fun gotoRxJava2Sample(view: View) {
         startActivity(Intent(this, SimpleRetrofitActivity::class.java))
     }
+
+    fun gotoRoomSample(view: View) {
+        startActivity(Intent(this, RoomSampleActivity::class.java))
+    }
 }
 
 
