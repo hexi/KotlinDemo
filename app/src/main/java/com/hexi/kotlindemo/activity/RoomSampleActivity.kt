@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import com.hexi.kotlindemo.R
 import com.hexi.kotlindemo.adapter.UserAdapter
+import com.hexi.kotlindemo.ktx.showToast
 import com.hexi.kotlindemo.persistence.User
 import com.hexi.kotlindemo.persistence.UserDao
 import com.hexi.kotlindemo.persistence.UsersDatabase
@@ -67,6 +68,10 @@ class RoomSampleActivity : FragmentActivity() {
 
     fun insertUser(view: View) {
         val username = et_username.text.toString()
+        if (username.isNullOrEmpty()) {
+            showToast("Username must not empty!")
+            return
+        }
         val user = User(userName = username)
         Single.fromCallable {
             userDao.insertUser(user)

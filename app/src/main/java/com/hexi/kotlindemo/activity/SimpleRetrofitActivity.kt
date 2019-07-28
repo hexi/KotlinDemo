@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +13,7 @@ import com.hexi.kotlindemo.R
 import com.hexi.kotlindemo.api.ApiFactory
 import com.hexi.kotlindemo.coroutineSupport.LifecycleCoroutineScope
 import com.hexi.kotlindemo.data.Contributor
+import com.hexi.kotlindemo.ktx.showToast
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.activity_simple_retrofit.*
 import kotlinx.android.synthetic.main.item_recycler_view.*
@@ -67,8 +67,7 @@ class SimpleRetrofitActivity : FragmentActivity() {
             val owner = et_owner.text.toString()
             val repo = et_repo.text.toString()
             if (owner.isNullOrEmpty() || repo.isNullOrEmpty()) {
-                Toast.makeText(this@SimpleRetrofitActivity, "Owner and repo must not be empty!", Toast.LENGTH_SHORT)
-                        .show()
+                showToast("Owner and repo must not be empty!")
                 return@launch
             }
             progress_bar.visibility = View.VISIBLE
