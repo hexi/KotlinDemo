@@ -1,7 +1,7 @@
-package com.hexi.kotlindemo.test
+package com.hexi.kotlindemo.test.arithmetic
 
 
-object Arithmetic {
+object TwoSum {
     /**
      *
      * 给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。
@@ -26,7 +26,7 @@ object Arithmetic {
         return result
     }
 
-    fun toSum2(nums: IntArray, target: Int): IntArray {
+    fun twoSum2(nums: IntArray, target: Int): IntArray {
         val result = IntArray(2)
         val map: MutableMap<Int, Int> = mutableMapOf()
         for (i in nums.indices) {
