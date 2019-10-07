@@ -22,6 +22,31 @@ object Arithmetic {
         arr[0] = arr[0] xor arr[1] // arr[0] = arr[0] ^ arr[0] ^ arr[1] = arr[1] ^ 0 = arr[1]
     }
 
+    fun getAverage(a: Int, b: Int): Int {
+        return (a and b) + ((a xor b) shr 1)
+    }
+
+    /**
+     * 求绝对值
+     *
+     * 数值在计算机以补码形式表示和存储，负数的绝对值等于对其补码全部取反并加1，就可得到其数值。
+     * n右移31位，可以获得n的符号。若n为正数，得到0；若n为负数，得到 -1。
+     * 如果n为正数，n ^ 0 - 0 = n；如果n为负数，n ^ (-1) - (-1) = ~(n) + 1
+     *
+     */
+    fun myAbs(n: Int): Int {
+        return (n xor (n shr 31)) - (n shr 31)
+    }
+
+    /**
+     * 是不不是2的整数次⽅方
+     *
+     * 如果为2的整数次方那么二进制中的只有⼀一个1，消掉这个1就变为0
+     */
+    fun isLog2(number: Int): Boolean {
+        return (number and (number - 1)) == 0
+    }
+
     fun countOne(number: Int): Int {
         var count = 0
         var a = number
