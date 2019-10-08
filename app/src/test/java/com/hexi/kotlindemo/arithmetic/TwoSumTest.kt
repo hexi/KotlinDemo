@@ -1,7 +1,7 @@
 package com.hexi.kotlindemo.arithmetic
 
-import com.google.gson.Gson
 import com.hexi.kotlindemo.test.arithmetic.Arithmetic
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
 class TwoSumTest {
@@ -10,6 +10,6 @@ class TwoSumTest {
         val nums = intArrayOf(2, 7, 11, 15)
         val target = 22
         val result = Arithmetic.twoSum(nums, target)
-        println("test_twoSum: ${Gson().toJson(result)}")
+        assertThat(result).hasSize(2).containsExactly(1, 3)
     }
 }

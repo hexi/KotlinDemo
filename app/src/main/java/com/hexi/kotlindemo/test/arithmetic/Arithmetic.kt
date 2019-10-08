@@ -47,6 +47,15 @@ object Arithmetic {
         return (number and (number - 1)) == 0
     }
 
+    /**
+     * 求一个整数的二进制表示中1的个数
+     * n&(n - 1) 会消掉最低位的1 如：
+     *   1010
+     * & 1001
+     * ------
+     *   1000
+     *
+     */
     fun countOne(number: Int): Int {
         var count = 0
         var a = number
@@ -157,5 +166,61 @@ object Arithmetic {
         }
 
         return result
+    }
+
+    /**
+     * 在其他数都出现两次的数组中找到只出现一次的那个数。
+     *
+     * 首先我们应该知道二进制异或操作，异或结果是二进制中两个位相同为0，相异为1。因此可以有个规律：
+     * 规律1：A^A = 0, A^0 = A
+     * 还需要知道一个规律：
+     * 规律2：多个数异或操作，遵循交换律和结合律。
+     *
+     * 如果我们有一个变量 eO = 0 那么在遍历数组过程中，使每个数与 eO 异或得到的值再赋值给 eO，
+     * 即 eO = eO ^ num 那么遍历结束后eO的值一定是那个出现一次的数的值。我们可以举个例子：
+     * 假设有这么一个序列： C B D A A B C 其中只有 D 出现一次，那么因为异或满足交换律和结合律，
+     * 所以我们遍历异或此序列的过程等价于：
+     * eO ^ (A ^ A ^ B ^ B ^ C ^ C ) ^ D = eO ^ 0 ^ D = D
+     *
+     */
+    fun oddTimesNum(arr: IntArray): Int {
+        var e0 = 0
+        arr.forEach { item ->
+            e0 = e0 xor item
+        }
+
+        return e0
+    }
+
+    /**
+     * 在其他数都出现两次的数组中找到只出现一次的那两个数。
+     *
+     * 我们顺着上题的思路来思考，如果有两个数获得的结果 eO 肯定是 eO = a^b,此题的关键就在于如何分别得到 a，b 这两个数。
+     * 我们应该想到，任何不相同的两个除了跟自己异或外，不可能每一个位都相同，也就是说不相同的两个数 a b 异或得到结果二进制表示上肯定有一位为 1。 这是关键。
+     *
+     * 我们可以假设第 k 位不为 0 ，那么就说明 a 与 b 在这位上数值不相同。我们要做只是设置一个数第 k 位 为 1，其余位为 0 记为 rightOne。
+     *
+     * 这时需要拿 eOhasOne = 0 再异或遍历一次数组，但是需要忽略与 rightOne 相与等于 0 的数。
+     * 因为相与等于 0 则代表了这个数肯定是两个数中第 k 位不为 1的那个。
+     * 最终得到的 eOhasOne 就是 a b 中第 k 为 1 的那个。
+     *
+     * 那么接下来就剩下一个问题要解决了，如何找到 rightOne ，
+     * 这里采用与本身补码相与的方法得到即 int rightOne = eO & (~eO + 1) 。
+     *
+     */
+    fun findTwoOddTimesNum(arr: IntArray): IntArray {
+        var e0 = 0
+        arr.forEach { item ->
+            e0 = e0 xor item
+        }
+        var rightOne = e0 and (e0.inv() + 1)
+        var e0hasOne = 0
+        arr.forEach { item ->
+            if ((rightOne and item) != 0) {
+                e0hasOne = e0hasOne xor item
+            }
+        }
+
+        return intArrayOf(e0hasOne, e0 xor e0hasOne)
     }
 }

@@ -1,6 +1,7 @@
 package com.hexi.kotlindemo.arithmetic
 
 import com.hexi.kotlindemo.test.arithmetic.Arithmetic
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
 class OneCountTest {
@@ -8,6 +9,6 @@ class OneCountTest {
     fun testCountOne() {
         val number = 111
         val count = Arithmetic.countOne(number)
-        println(count)
+        assertThat(count).isEqualTo(6)
     }
 }
