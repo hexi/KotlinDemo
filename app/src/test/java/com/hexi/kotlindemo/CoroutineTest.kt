@@ -2,8 +2,31 @@ package com.hexi.kotlindemo
 
 import kotlinx.coroutines.*
 import org.junit.Test
+import java.util.concurrent.atomic.AtomicInteger
 
 class CoroutineTest {
+
+    @Test
+    fun test_start_lots_of_coroutines() = runBlocking {
+        val mp = Runtime.getRuntime().availableProcessors()
+        println("逻辑cpu数量: $mp")
+        val threadId = Thread.currentThread().id
+        println("主协程所属线程id = $threadId")
+        for (i in 1..10) {
+            async { name(i) }
+        }
+
+        delay(100 * 1000)
+    }
+
+    private suspend fun name(i : Int) = withContext(Dispatchers.IO) {
+        repeat(10) {
+            delay(1000)
+            val threadId = Thread.currentThread().id
+            val s = "iqoo$i belong thread $threadId"
+            println(s)
+        }
+    }
 
     @Test
     fun sample_coroutine() = runBlocking {
