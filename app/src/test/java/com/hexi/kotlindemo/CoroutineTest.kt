@@ -2,7 +2,6 @@ package com.hexi.kotlindemo
 
 import kotlinx.coroutines.*
 import org.junit.Test
-import java.util.concurrent.atomic.AtomicInteger
 
 class CoroutineTest {
 
@@ -19,7 +18,7 @@ class CoroutineTest {
         delay(100 * 1000)
     }
 
-    private suspend fun name(i : Int) = withContext(Dispatchers.IO) {
+    private suspend fun name(i: Int) = withContext(Dispatchers.IO) {
         repeat(10) {
             delay(1000)
             val threadId = Thread.currentThread().id
@@ -130,13 +129,13 @@ class CoroutineTest {
                     println("job: I'm sleeping $i ...")
                     delay(500L)
                 }
-            } finally {
+            }  finally {
                 println("job: I'm running finally.")
             }
         }
         delay(1300L) // 延迟一段时间
         println("main: I'm tired waiting!")
-        job.cancelAndJoin()
+        job.cancelAndJoin() // 等待了所有的终结动作执行完毕，才会执行下面的语句
         println("main: Now i can quit.")
     }
 
@@ -171,6 +170,22 @@ class CoroutineTest {
             }
         }
         println("main: Now i can quit.")
+    }
+
+    @Test
+    fun test_catch_timeout() = runBlocking {
+        try {
+            withTimeout(1300) {
+                repeat(1000) { i ->
+                    println("I'm sleeping $i ...")
+                    delay(500L)
+                }
+            }
+        } catch (e: TimeoutCancellationException) {
+            println("catch timeout cancellation exception: ${e.message}")
+        }
+
+        println("main: I waiting...")
     }
 
     @Test

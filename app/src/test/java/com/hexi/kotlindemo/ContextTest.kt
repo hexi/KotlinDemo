@@ -24,6 +24,7 @@ class ContextTest {
     fun test1() = runBlocking<Unit> {
         launch(Dispatchers.Unconfined) { // 非受限的——将和主线程一起工作
             println("Unconfined      : I'm working in thread ${Thread.currentThread().name}, time: ${System.currentTimeMillis()}")
+//            customThreadDelay()
             delay(500)
             println("Unconfined      : After delay in thread ${Thread.currentThread().name}, time: ${System.currentTimeMillis()}")
         }
@@ -32,6 +33,10 @@ class ContextTest {
             delay(1000)
             println("main runBlocking: After delay in thread ${Thread.currentThread().name}, time: ${System.currentTimeMillis()}")
         }
+    }
+
+    private suspend fun customThreadDelay() = withContext(newSingleThreadContext("customThreadContext")) {
+        delay(500)
     }
 
     @Test
