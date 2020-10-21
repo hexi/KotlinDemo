@@ -4,7 +4,7 @@ package com.hexi.kotlindemo.test.collections
  * Created by hexi on 2017/8/3.
  */
 
-fun main(args: Array<String>) {
+fun main() {
     val numbers: MutableList<Int> = mutableListOf(1, 2, 3)
     val readOnlyView: List<Int> = numbers
     println(numbers)

@@ -104,7 +104,7 @@ fun testObject() {
     println(adHoc.x + adHoc.y)
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val demo = NestedOuter.Nested().foo()
     println(demo)
 

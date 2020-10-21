@@ -12,6 +12,6 @@ fun eval(expr: Expr): Double = when (expr) {
 // 不再需要 `else` 子句，因为我们已经覆盖了所有的情况
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val const = Const(1.0)
 }

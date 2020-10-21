@@ -7,7 +7,7 @@ package com.hexi.kotlindemo.test.reflection
 fun isOdd(x: Int) = x % 2 != 0
 fun isOdd(s: String) = s == "brillig" || s == "slithy" || s == "tove"
 
-fun main(args: Array<String>) {
+fun main() {
     val numbers = listOf(1, 2, 3)
     println(numbers.filter { isOdd(it) })  // 输出 [1, 3]
     //等价于：

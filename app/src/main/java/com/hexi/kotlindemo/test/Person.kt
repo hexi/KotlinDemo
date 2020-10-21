@@ -31,7 +31,7 @@ class Person(name: String, age: Int = 0) : Animal(name) {
     }
 }
 
-public fun main(args: Array<String>) {
+public fun main() {
     val p = Person("hexi", 100)
     println(p.isEmpty)
     p.isEmpty = false

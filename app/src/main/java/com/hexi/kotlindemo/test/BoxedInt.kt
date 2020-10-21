@@ -12,7 +12,7 @@ class BoxedInt {
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val a: Int = 10000
     println(a === a)
     val boxedA: Int? = a

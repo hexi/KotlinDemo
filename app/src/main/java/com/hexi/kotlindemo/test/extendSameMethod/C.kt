@@ -10,7 +10,7 @@ class C: A(), B {
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val c  = C()
     c.f()
     c.a()

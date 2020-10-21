@@ -25,7 +25,7 @@ data class Point(val x: Int, val y: Int) {
     operator fun unaryMinus(): Point = Point(-x, -y)
 }
 
-fun main(args: Array<String>) {
+fun main() {
     //类型的检查与转换
     val obj = "aaa"
     if (obj is String) {

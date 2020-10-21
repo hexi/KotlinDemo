@@ -11,7 +11,7 @@ class Example {
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val example = Example()
     println(example.lazyValue)
     println(example.lazyValue)

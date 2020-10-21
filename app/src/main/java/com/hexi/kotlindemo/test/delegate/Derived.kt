@@ -10,6 +10,6 @@ class Derived(val b: Base = BaseImpl(20)): Base by b {
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     Derived().print()
 }

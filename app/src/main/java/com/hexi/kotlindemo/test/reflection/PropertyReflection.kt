@@ -9,7 +9,7 @@ import kotlin.reflect.KProperty1
 
 var x = 1
 
-fun main(args:Array<String>) {
+fun main() {
     val xp: KProperty0<Int> = ::x
     println(xp.get())
 

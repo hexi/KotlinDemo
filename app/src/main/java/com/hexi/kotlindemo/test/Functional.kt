@@ -76,7 +76,7 @@ suspend fun doSomething() {
     println("after sleep...")
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val list = arrayListOf<String>("1", "2", "3")
     val ints: List<Int> = list.myMap { item -> item.toInt() }
     println(ints)

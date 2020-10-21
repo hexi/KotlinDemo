@@ -20,7 +20,7 @@ class User {
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val user = User()
     user.name = "first"
     user.name = "second"

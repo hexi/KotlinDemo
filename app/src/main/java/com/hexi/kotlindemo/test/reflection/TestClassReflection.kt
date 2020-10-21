@@ -10,7 +10,7 @@ import kotlin.reflect.full.starProjectedType
  * Created by hexi on 2017/9/20.
  */
 
-fun main(args: Array<String>) {
+fun main() {
     val c = MyClass::class
     val co = c.createInstance()
     println(co.toString())

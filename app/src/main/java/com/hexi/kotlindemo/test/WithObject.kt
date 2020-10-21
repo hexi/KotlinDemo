@@ -22,7 +22,7 @@ class Turtle {
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val myTurtle = Turtle()
     with(myTurtle) {
         penDown()

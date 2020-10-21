@@ -9,7 +9,7 @@ class MapUser(val map: Map<String, Any?>) {
     val age: Int by map
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val user = MapUser(mapOf(
             "name" to "John Doe",
             "age" to 100

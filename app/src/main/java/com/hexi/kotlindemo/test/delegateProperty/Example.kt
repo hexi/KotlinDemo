@@ -21,7 +21,7 @@ class Delegate {
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val ex = Example()
     println(ex.p)
     println(ex.p)

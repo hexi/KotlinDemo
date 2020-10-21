@@ -72,7 +72,7 @@ val funLit = lambda@ fun String.() {
     val d = this // funLit 的接收者
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val ss = "aaa"
     ss.funLit()
 
