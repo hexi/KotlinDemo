@@ -1,9 +1,26 @@
 package com.hexi.kotlindemo
 
 import kotlinx.coroutines.*
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.setMain
+import org.junit.After
+import org.junit.Before
 import org.junit.Test
 
-class ContextTest {
+//    https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/
+class ContextTest : BaseTest() {
+    @Test
+    fun testFoo() = runBlockingTest { // a coroutine with an extra test control
+        val actual = foo()
+        // ...
+    }
+
+    suspend fun foo() {
+        delay(1_000) // auto-advances virtual time by 1_000ms due to runBlockingTest
+        // ...
+    }
+
     @Test
     fun test0() = runBlocking<Unit> {
         launch { // 运行在父协程的上下文中，即 runBlocking 主协程
@@ -157,7 +174,7 @@ class ContextTest {
         delay(500L) // 延迟半秒钟
         println("Destroying activity!")
         activity.destroy() // 取消所有的协程
-        delay(2000) // 为了在视觉上确认它们没有工作
+        delay(4000) // 为了在视觉上确认它们没有工作
     }
 
     val threadLocal = ThreadLocal<String?>()

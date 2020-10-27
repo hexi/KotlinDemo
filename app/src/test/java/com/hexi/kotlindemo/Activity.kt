@@ -2,13 +2,14 @@ package com.hexi.kotlindemo
 
 import kotlinx.coroutines.*
 
-class Activity : CoroutineScope by CoroutineScope(Dispatchers.Default) {
+class Activity : CoroutineScope by MainScope() {
     fun doSomething() {
-        // launch ten coroutines for a demo, each working for a different time
+        // 在示例中启动了 10 个协程，且每个都工作了不同的时长
         repeat(10) { i ->
             launch {
-                delay((i + 1) * 200L) // variable delay 200ms, 400ms, ... etc
-                println("Coroutine $i is done")
+                log("Coroutine $i is start...")
+                delay((i + 1) * 200L) // 延迟 200 毫秒、400 毫秒、600 毫秒等等不同的时间
+                log("Coroutine $i is done")
             }
         }
     }
@@ -16,4 +17,6 @@ class Activity : CoroutineScope by CoroutineScope(Dispatchers.Default) {
     fun destroy() {
         cancel() // Extension on CoroutineScope
     }
+
+    private fun log(msg: String) = println("[${Thread.currentThread().name}] $msg")
 }
