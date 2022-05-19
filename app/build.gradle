@@ -31,9 +31,9 @@ androidExtensions {
 
 dependencies {
     ext.retrofit_version = '2.3.0'
-    def room_version = "2.2.5"
+    def room_version = "2.2.6"
     ext.coroutines_version = '1.4.0-M1'
-    def lifecycle_version = "2.2.0"
+    def lifecycle_version = "2.3.1"
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"

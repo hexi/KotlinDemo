@@ -1,8 +1,12 @@
 package com.hexi.kotlindemo
 
+import com.google.gson.Gson
+import org.assertj.core.api.Assertions.assertThat
 import org.joda.time.DateTime
 import org.joda.time.Days
 import org.junit.Test
+import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.ConcurrentMap
 import java.util.concurrent.CountDownLatch
 
 /**
@@ -64,5 +68,24 @@ class ExampleUnitTest {
         val now = DateTime.now()
                 .withTimeAtStartOfDay()
         println("${Days.daysBetween(last, now).days}, $now, $last, ${last.isEqual(now)}")
+    }
+
+    @Test
+    fun `test remove item in iterator of hashmap`() {
+        val map = ConcurrentHashMap<String, Int>()
+        map["a"] = 1
+        map["b"] = 2
+        map["c"] = 3
+        map["d"] = 4
+        val it = map.entries.iterator()
+        while (it.hasNext()) {
+            val entry = it.next()
+            println("===key: ${entry.key}, value: ${entry.value}")
+            if (entry.key == "b") {
+                it.remove()
+            }
+        }
+        println("===map: ${Gson().toJson(map)}")
+        assertThat(map.count()).isEqualTo(3)
     }
 }
