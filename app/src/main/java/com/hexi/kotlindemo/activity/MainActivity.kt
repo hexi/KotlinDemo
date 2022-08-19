@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.FragmentActivity
 import com.hexi.kotlindemo.R
+import com.hexi.kotlindemo.screenRecord.ScreenRecordActivity
 
 class MainActivity : FragmentActivity() {
 
@@ -19,6 +20,10 @@ class MainActivity : FragmentActivity() {
 
     fun gotoRoomSample(view: View) {
         startActivity(Intent(this, RoomSampleActivity::class.java))
+    }
+
+    fun gotoScreenRecord(view: View) {
+        startActivity(Intent(this, ScreenRecordActivity::class.java))
     }
 }
 

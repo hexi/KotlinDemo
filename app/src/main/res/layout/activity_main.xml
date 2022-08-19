@@ -34,5 +34,14 @@
             android:onClick="gotoRoomSample"
             android:padding="6dp"
             android:text="Room" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="9dp"
+            android:background="@drawable/bg_label"
+            android:onClick="gotoScreenRecord"
+            android:padding="6dp"
+            android:text="跳到屏幕录制页" />
     </LinearLayout>
 </LinearLayout>

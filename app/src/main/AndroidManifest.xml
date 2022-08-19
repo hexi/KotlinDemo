@@ -16,6 +16,9 @@
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="false"
@@ -43,6 +46,16 @@
             android:name=".activity.RoomSampleActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".screenRecord.ScreenRecordActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <service
+            android:name=".screenRecord.ScreenRecordService"
+            android:enabled="true"
+            android:exported="false" />
     </application>
 
 </manifest>
