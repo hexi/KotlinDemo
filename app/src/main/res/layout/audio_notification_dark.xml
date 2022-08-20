@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    tools:background="#000000">
+
+    <ImageView
+        android:id="@+id/iv_launcher"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="4dp"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/tv_app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="6dp"
+        android:layout_marginTop="6dp"
+        android:layout_toRightOf="@+id/iv_launcher"
+        android:text="@string/app_name"
+        android:textColor="#CCCCCC"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_app_name"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="6dp"
+        android:layout_toLeftOf="@+id/tv_close"
+        android:ellipsize="end"
+        android:gravity="left"
+        android:singleLine="true"
+        android:text="屏幕录制中"
+        android:textColor="#CCCCCC"
+        android:textSize="18dp" />
+
+    <ImageView
+        android:id="@+id/tv_close"
+        android:layout_width="34dp"
+        android:layout_height="56dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="8dp"
+        android:paddingLeft="8dp"
+        android:paddingTop="19dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="19dp"
+        android:src="@drawable/icon_global_big_cancel_light" />
+
+</RelativeLayout>

@@ -10,11 +10,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.hexi.kotlindemo.R;
-
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
+
+import com.hexi.kotlindemo.R;
 
 
 public class ScreenRecordActivity extends FragmentActivity {
@@ -76,6 +76,7 @@ public class ScreenRecordActivity extends FragmentActivity {
                 Intent service = new Intent(this, ScreenRecordService.class);
                 service.putExtra("resultCode", resultCode);
                 service.putExtra("data", data);
+                service.setAction(ScreenRecordService.ACTION_START_RECORD);
                 startService(service);
 
             } catch (Exception e) {
