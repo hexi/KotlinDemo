@@ -19,23 +19,19 @@ import com.hexi.kotlindemo.R;
 
 public class ScreenRecordActivity extends FragmentActivity {
     private static final int REQUEST_CODE = 1;
-    private MediaProjectionManager mMediaProjectionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen_record);
-
-        checkPermission(this); //检查权限
-
-        mMediaProjectionManager = (MediaProjectionManager) getSystemService(MEDIA_PROJECTION_SERVICE);
     }
 
     public void StartRecorder(View view) {
+        checkPermission(this); //检查权限
         createScreenCapture();
     }
 
-    public void StopRecorder(View view){
+    public void StopRecorder(View view) {
         Intent service = new Intent(this, ScreenRecordService.class);
         stopService(service);
     }
@@ -44,13 +40,15 @@ public class ScreenRecordActivity extends FragmentActivity {
     public static void checkPermission(FragmentActivity activity) {
         if (Build.VERSION.SDK_INT >= 23) {
             int checkPermission =
-                    ContextCompat.checkSelfPermission(activity, Manifest.permission.RECORD_AUDIO)
+                    ContextCompat.checkSelfPermission(activity, Manifest.permission.MODIFY_AUDIO_SETTINGS)
+                            + ContextCompat.checkSelfPermission(activity, Manifest.permission.RECORD_AUDIO)
                             + ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_PHONE_STATE)
                             + ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                             + ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE);
             if (checkPermission != PackageManager.PERMISSION_GRANTED) {
                 //动态申请
                 ActivityCompat.requestPermissions(activity, new String[]{
+                        Manifest.permission.MODIFY_AUDIO_SETTINGS,
                         Manifest.permission.RECORD_AUDIO,
                         Manifest.permission.READ_PHONE_STATE,
                         Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -61,8 +59,18 @@ public class ScreenRecordActivity extends FragmentActivity {
 
 
     private void createScreenCapture() {
-        Intent captureIntent = mMediaProjectionManager.createScreenCaptureIntent();
-        startActivityForResult(captureIntent, REQUEST_CODE);
+        MediaProjectionManager mediaProjectionManager = (MediaProjectionManager) getSystemService(MEDIA_PROJECTION_SERVICE);
+        if (mediaProjectionManager != null) {
+            Intent captureIntent = mediaProjectionManager.createScreenCaptureIntent();
+            PackageManager packageManager = this.getPackageManager();
+            if (packageManager.resolveActivity(captureIntent, PackageManager.MATCH_DEFAULT_ONLY) != null) {
+                //存在录屏授权的Activity
+                startActivityForResult(captureIntent, REQUEST_CODE);
+            } else {
+                Toast.makeText(this, "该机器不能录屏", Toast.LENGTH_SHORT).show();
+            }
+        }
+
     }
 
 
