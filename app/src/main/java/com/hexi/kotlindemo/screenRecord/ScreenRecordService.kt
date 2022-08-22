@@ -111,7 +111,7 @@ class ScreenRecordService : Service() {
         if (isVideoSd) videoQuality = "SD"
         Log.i(TAG, "Create MediaRecorder")
         val mediaRecorder = MediaRecorder()
-        mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC)
+        mediaRecorder.setAudioSource(MediaRecorder.AudioSource.VOICE_COMMUNICATION)
         mediaRecorder.setVideoSource(MediaRecorder.VideoSource.SURFACE)
         mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
         mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB) //after setOutputFormat()
