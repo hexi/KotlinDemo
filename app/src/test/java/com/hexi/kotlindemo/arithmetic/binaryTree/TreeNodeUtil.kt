@@ -8,18 +8,18 @@ object TreeNodeUtil {
      * @param array
      * @return
      */
-    fun arrayToTreeNode(array: Array<Int?>): TreeNode? {
+    fun arrayToTreeNode(array: Array<Int?>): TreeNode<Int>? {
         if (array.isEmpty()) {
             return null
         }
         val root = TreeNode(
             array[0]!!
         )
-        val queue: Queue<TreeNode> = LinkedList<TreeNode>()
+        val queue: Queue<TreeNode<Int>> = LinkedList<TreeNode<Int>>()
         queue.add(root)
         var isLeft = true
         for (i in 1 until array.size) {
-            val node: TreeNode = queue.peek()
+            val node: TreeNode<Int> = queue.peek()
             if (isLeft) {
                 if (array[i] != null) {
                     node.left = TreeNode(array[i]!!)
@@ -38,7 +38,7 @@ object TreeNodeUtil {
         return root
     }
 
-    fun isSameTree(p: TreeNode?, q: TreeNode?): Boolean {
+    fun isSameTree(p: TreeNode<Int>?, q: TreeNode<Int>?): Boolean {
         return if (p == null || q == null) {
             p == q
         } else p.value === q.value && isSameTree(p.left, q.left) && isSameTree(p.right, q.right)

@@ -4,21 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TreeNodePrinter {
-    /** Node that can be printed */
-    public interface PrintableNode
-    {
-        /** Get left child */
-        PrintableNode getLeft();
-
-
-        /** Get right child */
-        PrintableNode getRight();
-
-
-        /** Get text to be printed */
-        String getText();
-    }
-
 
     /**
      * Print a tree
@@ -26,12 +11,12 @@ public class TreeNodePrinter {
      * @param root
      *            tree root node
      */
-    public static void print(PrintableNode root)
+    public static void print(TreeNode root)
     {
         List<List<String>> lines = new ArrayList<List<String>>();
 
-        List<PrintableNode> level = new ArrayList<PrintableNode>();
-        List<PrintableNode> next = new ArrayList<PrintableNode>();
+        List<TreeNode> level = new ArrayList<TreeNode>();
+        List<TreeNode> next = new ArrayList<TreeNode>();
 
         level.add(root);
         int nn = 1;
@@ -43,7 +28,7 @@ public class TreeNodePrinter {
 
             nn = 0;
 
-            for (PrintableNode n : level) {
+            for (TreeNode n : level) {
                 if (n == null) {
                     line.add(null);
 
@@ -66,7 +51,7 @@ public class TreeNodePrinter {
 
             lines.add(line);
 
-            List<PrintableNode> tmp = level;
+            List<TreeNode> tmp = level;
             level = next;
             next = tmp;
             next.clear();
