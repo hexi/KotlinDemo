@@ -2,6 +2,7 @@ package com.hexi.kotlindemo.activity
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,18 +15,30 @@ import com.hexi.kotlindemo.api.ApiFactory
 import com.hexi.kotlindemo.coroutineSupport.LifecycleCoroutineScope
 import com.hexi.kotlindemo.data.Contributor
 import com.hexi.kotlindemo.ktx.showToast
+import io.reactivex.BackpressureStrategy
+import io.reactivex.Flowable
+import io.reactivex.FlowableOnSubscribe
+import io.reactivex.Scheduler
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.activity_simple_retrofit.*
 import kotlinx.android.synthetic.main.item_recycler_view.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.reactive.asFlow
 import kotlinx.coroutines.rx2.await
 import kotlinx.coroutines.withContext
+import java.util.concurrent.atomic.AtomicBoolean
+import java.util.concurrent.atomic.AtomicInteger
 
 class SimpleRetrofitActivity : FragmentActivity() {
-
+    private val TAG = "SimpleRetrofitActivity"
     private var adapter: MyAdapter? = null
     private val activityScope = LifecycleCoroutineScope()
+    private val counter = AtomicInteger(0)
+    private val start = AtomicBoolean(false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +53,30 @@ class SimpleRetrofitActivity : FragmentActivity() {
         adapter = MyAdapter()
         recycler_view.layoutManager = LinearLayoutManager(this)
         recycler_view.adapter = adapter
+
+        activityScope.launch {
+            flowableRequest().asFlow().collectLatest { Log.d(TAG, "===int flow: $it") }
+        }
+        tv_collect_flowable.setOnClickListener {
+            start.set(!start.get())
+        }
+    }
+
+    private fun flowableRequest(): Flowable<Int> {
+        return Flowable.create(FlowableOnSubscribe<Int> { emitter ->
+            while (!emitter.isCancelled) {
+                Log.d(TAG, "loop in flowable")
+                if (start.get()) {
+                    emitter.onNext(counter.getAndAdd(1))
+                }
+                try {
+                    Thread.sleep(500)
+                } catch (e: InterruptedException) {
+                    Log.e(TAG, "===the flowable has canceled")
+                }
+            }
+        }, BackpressureStrategy.BUFFER)
+            .subscribeOn(Schedulers.io())
     }
 
     override fun onDestroy() {
@@ -51,14 +88,17 @@ class SimpleRetrofitActivity : FragmentActivity() {
         hideSoftKeyboard()
         loadData()
     }
+
     /**
      * Hide soft keyboard.
      */
     private fun hideSoftKeyboard() {
         if (currentFocus != null) {
             val mgr = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            mgr.hideSoftInputFromWindow(currentFocus!!.windowToken,
-                    InputMethodManager.HIDE_NOT_ALWAYS)
+            mgr.hideSoftInputFromWindow(
+                currentFocus!!.windowToken,
+                InputMethodManager.HIDE_NOT_ALWAYS
+            )
         }
     }
 
@@ -80,8 +120,8 @@ class SimpleRetrofitActivity : FragmentActivity() {
     private suspend fun fetchContributors(owner: String, repo: String): List<Contributor> {
         return withContext(Dispatchers.IO) {
             ApiFactory.githubApi
-                    .contributors(owner, repo)
-                    .await()
+                .contributors(owner, repo)
+                .await()
         }
     }
 }
